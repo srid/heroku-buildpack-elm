@@ -20,11 +20,14 @@ cd ${cache}/bin
 echo "-----> Retrieving Elm binaries"
 wget -q -c ${S3_URL}/elm
 wget -q -c ${S3_URL}/elm-package
-wget -q -c ${S3_URL}/spas
+if grep --quiet spas ${build}/Procfile; then
+   echo "-----> Retrieving Spas"
+   wget -q -c ${S3_URL}/spas
+fi
 
 chmod -R a+x ${cache}/bin
 PATH=${cache}/bin:$PATH
 
 cd ${build}
-elm package install
+elm package install --yes
 elm make ${ELM_MAIN}
