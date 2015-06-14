@@ -3,5 +3,5 @@
 cat << EOF
 ---
 default_process_types:
-  web: spas
+  web: warp -p ${PORT} -d .
 EOF
