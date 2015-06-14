@@ -48,10 +48,16 @@ fi
 chmod -R a+x ${cache}/bin ${build}/bin
 PATH=${cache}/bin:$PATH
 
+# Restore elm package cache
+if test -d ${cache}/elm-stuff; then
+   cp -r ${cache}/elm-stuff ${build}/elm-stuff
+fi
+
 cd ${build}
 echo "-----> Installing Elm package dependencies"
 # TODO cache these
 elm package install --yes | indent
+cp -r ${build}/elm-stuff ${cache}/
 echo "-----> Compiling"
 elm make --yes ${ELM_MAIN} --output=${ELM_OUTPUT} | indent
 
