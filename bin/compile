@@ -18,6 +18,7 @@ S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
 mkdir ${cache}/bin
 cd ${cache}/bin
 wget -q -c ${S3_URL}/elm
+chmod -R a+x ${cache}/bin
 PATH=${cache}/bin:$PATH
 
 cd ${build}
