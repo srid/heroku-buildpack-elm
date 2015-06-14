@@ -48,7 +48,7 @@ echo "-----> Installing Elm package dependencies"
 # TODO cache these
 elm package install --yes | indent
 echo "-----> Compiling"
-elm make --yes ${ELM_MAIN} | indent
+elm make --yes ${ELM_MAIN} --output=${ELM_OUTPUT} | indent
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
