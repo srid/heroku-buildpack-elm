@@ -33,7 +33,7 @@ download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
 download ${S3_URL}/elm/${ELM_VERSION} elm-make
 
-if grep --quiet spas ${build}/Procfile; then
+if grep --quiet spas ${build}/Procfile 2> /dev/null; then
    echo "-----> Retrieving Spas ${SPAS_VERSION} binary"
    download ${S3_URL}/spas/${SPAS_VERSION} spas
    mkdir -p ${build}/bin
