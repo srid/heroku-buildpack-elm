@@ -1,11 +1,15 @@
 #!/bin/sh
 
+set -eo pipefail
+
 indent() {
   sed -u 's/^/       /'
 }
 
+mkdir -p "$1" "$2"
 build=$(cd "$1/" && pwd)
 cache=$(cd "$2/" && pwd)
+buildpack=$(cd "$(dirname $0)/.." && pwd)
 
 ELM_VERSION=${ELM_VERSION:-0.15}
 VERSION=elm-${ELM_VERSION}:spas-0.1.0.0
