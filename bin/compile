@@ -50,6 +50,7 @@ PATH=${cache}/bin:$PATH
 
 # Restore elm package cache
 if test -d ${cache}/elm-stuff; then
+   echo "-----> Restore Elm package cache"
    cp -r ${cache}/elm-stuff ${build}/elm-stuff
 fi
 
