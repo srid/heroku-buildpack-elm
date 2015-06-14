@@ -15,7 +15,7 @@ ELM_VERSION=${ELM_VERSION:-0.15}
 VERSION=elm-${ELM_VERSION}:spas-0.1.0.0
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
 
-mkdir ${cache}/bin
+mkdir -p ${cache}/bin
 cd ${cache}/bin
 echo "-----> Retrieving Elm binaries"
 wget -q -c ${S3_URL}/elm
