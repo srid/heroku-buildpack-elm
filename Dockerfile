@@ -40,5 +40,8 @@ RUN mkdir -p /app/.profile.d /app/bin
 RUN echo "export PATH=\"/app/bin:\$PATH\"" > /app/.profile.d/appbin.sh
 RUN echo "cd /app" >> /app/.profile.d/appbin.sh
 
+# AWS cli
+RUN apt-get -y install awscli
+
 ADD docker2s3.sh /app/bin/
 ENV VERSION elm-${ELM_VERSION}:spas-${SPAS_VERSION}

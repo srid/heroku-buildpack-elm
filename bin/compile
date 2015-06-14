@@ -1,0 +1,15 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+ELM_VERSION=${ELM_VERSION:-0.15}
+VERSION=elm-${ELM_VERSION}:spas-0.1.0.0
+S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
+
+pushd ${CACHE_DIR}
+mkdir -p bin
+cd bin
+wget -O ${S3_URL}/elm
+popd
