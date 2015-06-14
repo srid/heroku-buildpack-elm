@@ -44,4 +44,3 @@ RUN echo "cd /app" >> /app/.profile.d/appbin.sh
 RUN apt-get -y install awscli
 
 ADD docker2s3.sh /app/bin/
-ENV VERSION elm-${ELM_VERSION}:spas-${SPAS_VERSION}

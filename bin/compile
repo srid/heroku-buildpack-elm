@@ -12,8 +12,8 @@ cache=$(cd "$2/" && pwd)
 buildpack=$(cd "$(dirname $0)/.." && pwd)
 
 ELM_VERSION=${ELM_VERSION:-0.15}
-VERSION=elm-${ELM_VERSION}:spas-0.1.0.0
-S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
+SPAS_VERSION=${SPAS_VERSION:-0.1.0.0}
+S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets
 
 download() {
            url=$1
@@ -29,15 +29,18 @@ download() {
 mkdir -p ${cache}/bin
 cd ${cache}/bin
 echo "-----> Retrieving Elm binaries"
-download ${S3_URL} elm
-download ${S3_URL} elm-package
-download ${S3_URL} elm-make
+download ${S3_URL}/elm/${ELM_VERSION} elm
+download ${S3_URL}/elm/${ELM_VERSION} elm-package
+download ${S3_URL}/elm/${ELM_VERSION} elm-make
 
 if grep --quiet spas ${build}/Procfile; then
    echo "-----> Retrieving Spas"
-   download ${S3_URL} spas
+   download ${S3_URL}/spas/${SPAS_VERSION} spas
    mkdir -p ${build}/bin
    cp spas ${build}/bin
+else
+  # TODO: Use a static web server
+  true
 fi
 
 chmod -R a+x ${cache}/bin ${build}/bin
