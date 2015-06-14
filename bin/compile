@@ -21,14 +21,19 @@ echo "-----> Retrieving Elm binaries"
 curl -sO ${S3_URL}/elm
 curl -sO ${S3_URL}/elm-package
 curl -sO ${S3_URL}/elm-make
-if grep --quiet spas ${build}/Procfile; then
-   echo "-----> Retrieving Spas"
-   curl -sO ${S3_URL}/spas
-fi
-
 chmod -R a+x ${cache}/bin
 PATH=${cache}/bin:$PATH
+
+mkdir -p ${build}/bin
+if grep --quiet spas ${build}/Procfile; then
+   echo "-----> Retrieving Spas"
+   cd ${build}/bin
+   curl -sO ${S3_URL}/spas
+fi
 
 cd ${build}
 elm package install --yes
 elm make ${ELM_MAIN}
+
+mkdir -p $build/.profile.d
+echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
