@@ -3,5 +3,5 @@
 cat << EOF
 ---
 default_process_types:
-  web: warp
+  web: warp -p $PORT
 EOF
