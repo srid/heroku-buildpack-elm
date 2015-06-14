@@ -57,11 +57,13 @@ fi
 
 cd ${build}
 echo "-----> Installing Elm package dependencies"
-# TODO cache these
 elm package install --yes | indent
 cp -r ${build}/elm-stuff ${cache}/
-echo "-----> Running 'elm make' with args: ${ELM_MAKE_ARGS}"
-elm make --yes ${ELM_MAKE_ARGS} | indent
+
+# TODO: detect src dir from elm-package.json
+ELM_SRC=${ELM_SRC:-"."}
+echo "-----> Running 'elm make' with args: ${ELM_SRC}/*.elm"
+elm make --yes ${ELM_SRC}/*.elm | indent
 # DEBUG
 ls -l | indent
 
