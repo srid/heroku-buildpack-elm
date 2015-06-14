@@ -4,12 +4,16 @@ indent() {
   sed -u 's/^/       /'
 }
 
+build=$(cd "$1/" && pwd)
+cache=$(cd "$2/" && pwd)
+
 ELM_VERSION=${ELM_VERSION:-0.15}
 VERSION=elm-${ELM_VERSION}:spas-0.1.0.0
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
 
-pushd ${CACHE_DIR}
-mkdir -p bin
-cd bin
+mkdir ${cache}/bin
+cd ${cache}/bin
 wget -O ${S3_URL}/elm
-popd
+
+cd ${build}
+elm package install
