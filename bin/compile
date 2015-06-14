@@ -18,11 +18,12 @@ S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
 mkdir -p ${cache}/bin
 cd ${cache}/bin
 echo "-----> Retrieving Elm binaries"
-wget -q -c ${S3_URL}/elm
-wget -q -c ${S3_URL}/elm-package
+curl -sO ${S3_URL}/elm
+curl -sO ${S3_URL}/elm-package
+curl -sO ${S3_URL}/elm-make
 if grep --quiet spas ${build}/Procfile; then
    echo "-----> Retrieving Spas"
-   wget -q -c ${S3_URL}/spas
+   curl -sO ${S3_URL}/spas
 fi
 
 chmod -R a+x ${cache}/bin
