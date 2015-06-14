@@ -60,8 +60,10 @@ echo "-----> Installing Elm package dependencies"
 # TODO cache these
 elm package install --yes | indent
 cp -r ${build}/elm-stuff ${cache}/
-echo "-----> Compiling"
+echo "-----> Running 'elm make' with args: ${ELM_MAKE_ARGS}"
 elm make --yes ${ELM_MAKE_ARGS} | indent
+# DEBUG
+ls -l | indent
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
