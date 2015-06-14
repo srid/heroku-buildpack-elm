@@ -15,16 +15,27 @@ ELM_VERSION=${ELM_VERSION:-0.15}
 VERSION=elm-${ELM_VERSION}:spas-0.1.0.0
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
 
+download() {
+           url=$1
+           basename=$2
+           if test -f ${basename}
+           then
+            true
+           else
+            curl -sO ${url}/${basename}
+           fi
+}
+
 mkdir -p ${cache}/bin
 cd ${cache}/bin
 echo "-----> Retrieving Elm binaries"
-curl -sO ${S3_URL}/elm
-curl -sO ${S3_URL}/elm-package
-curl -sO ${S3_URL}/elm-make
+download ${S3_URL} elm
+download ${S3_URL} elm-package
+download ${S3_URL} elm-make
 
 if grep --quiet spas ${build}/Procfile; then
    echo "-----> Retrieving Spas"
-   curl -sO ${S3_URL}/spas
+   download ${S3_URL} spas
    mkdir -p ${build}/bin
    cp spas ${build}/bin
 fi
