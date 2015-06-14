@@ -35,6 +35,14 @@ RUN cd /tmp/spas \
   && ${CABAL_INSTALL} \
   && cp .cabal-sandbox/bin/* /app/bin/
 
+# Install wasp (for those that do not want to use spas)
+ENV WARP_VERSION 3.1.0
+RUN mkdir /tmp/warp \
+    && cd /tmp/warp \
+    && cabal sandbox init \
+    && ${CABAL_INSTALL} wai-app-static-${WARP_VERSION} \
+    && cp -v .cabal-sandbox/bin/* /app/bin/
+
 # Startup scripts for heroku
 RUN mkdir -p /app/.profile.d /app/bin
 RUN echo "export PATH=\"/app/bin:\$PATH\"" > /app/.profile.d/appbin.sh

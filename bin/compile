@@ -28,19 +28,21 @@ download() {
 
 mkdir -p ${cache}/bin
 cd ${cache}/bin
-echo "-----> Retrieving Elm binaries"
+echo "-----> Retrieving Elm ${ELM_VERSION} binaries"
 download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
 download ${S3_URL}/elm/${ELM_VERSION} elm-make
 
 if grep --quiet spas ${build}/Procfile; then
-   echo "-----> Retrieving Spas"
+   echo "-----> Retrieving Spas ${SPAS_VERSION} binary"
    download ${S3_URL}/spas/${SPAS_VERSION} spas
    mkdir -p ${build}/bin
    cp spas ${build}/bin
 else
-  # TODO: Use a static web server
-  true
+   echo "-----> Retrieving Warp ${WARP_VERSION} binary"
+   download ${S3_URL}/warp/${WARP_VERSION} spas
+   mkdir -p ${build}/bin
+   cp warp ${build}/bin
 fi
 
 chmod -R a+x ${cache}/bin ${build}/bin
