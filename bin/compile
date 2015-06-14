@@ -40,7 +40,7 @@ if grep --quiet spas ${build}/Procfile; then
    cp spas ${build}/bin
 else
    echo "-----> Retrieving Warp ${WARP_VERSION} binary"
-   download ${S3_URL}/warp/${WARP_VERSION} spas
+   download ${S3_URL}/warp/${WARP_VERSION} warp
    mkdir -p ${build}/bin
    cp warp ${build}/bin
 fi
