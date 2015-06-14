@@ -45,9 +45,10 @@ PATH=${cache}/bin:$PATH
 
 cd ${build}
 echo "-----> Installing Elm package dependencies"
-elm package install --yes
+# TODO cache these
+elm package install --yes | indent
 echo "-----> Compiling"
-elm make ${ELM_MAIN}
+elm make --yes ${ELM_MAIN} | indent
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
