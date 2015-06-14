@@ -17,7 +17,7 @@ S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets/${VERSION}
 
 mkdir ${cache}/bin
 cd ${cache}/bin
-wget -O ${S3_URL}/elm
+wget -c ${S3_URL}/elm
 
 cd ${build}
 elm package install
