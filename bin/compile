@@ -13,6 +13,7 @@ buildpack=$(cd "$(dirname $0)/.." && pwd)
 
 ELM_VERSION=${ELM_VERSION:-0.15}
 SPAS_VERSION=${SPAS_VERSION:-0.1.0.0}
+WARP_VERSION=${WARP_VERSION:-3.1.0}
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets
 
 download() {
@@ -22,7 +23,7 @@ download() {
            then
             true
            else
-            curl -sO ${url}/${basename}
+            wget -q -c ${url}/${basename}
            fi
 }
 
