@@ -1,6 +1,8 @@
 # Heroku buildpack for Elm apps
 
-TODO
+See [the blog post](http://www.srid.ca/posts/2015-06-14-elm-on-heroku.html) for details.
+
+Or, check out the example app [elm-todomvc](https://github.com/evancz/elm-todomvc).
 
 ## HACKING
 
@@ -17,6 +19,3 @@ aws configure  # creates ~/.aws/...
 make upload
 ```
 
-### Testing the buildpack
-
-TODO
