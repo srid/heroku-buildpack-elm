@@ -27,6 +27,12 @@ download() {
            fi
 }
 
+error() {
+    msg=$1
+    echo "    !! ${msg}"
+    exit 1
+}
+
 mkdir -p ${cache}/bin
 cd ${cache}/bin
 echo "-----> Retrieving Elm ${ELM_VERSION} binaries"
@@ -60,12 +66,20 @@ echo "-----> Installing Elm package dependencies"
 elm package install --yes | indent
 cp -r ${build}/elm-stuff ${cache}/
 
-# TODO: detect src dir from elm-package.json
-ELM_SRC=${ELM_SRC:-"."}
-echo "-----> Running 'elm make' with args: ${ELM_SRC}/*.elm"
-elm make --yes ${ELM_SRC}/*.elm | indent
-# DEBUG
-ls -l | indent
+get_app_json_env() {
+    name=$1
+    if ! test -f ${build}/app.json; then
+        error "app.json missing."
+    fi
+    python -c "import json; j=json.load(open('app.json')); print j['env']['${name}']"
+}
 
+ELM_COMPILE=$(get_app_json_env "ELM_COMPILE")
+echo "-----> Compiling Elm sources with: ${ELM_COMPILE}"
+${ELM_COMPILE} | indent
+
+
+ELM_STATIC_DIR=$(get_app_json_env "ELM_STATIC_DIR")
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
+echo "cd ${ELM_STATIC_DIR}" > $build/.profile.d/static-dir.sh
