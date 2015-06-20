@@ -2,7 +2,7 @@
 # Run this script from within the docker container.
 
 BUCKET=heroku-buildpack-elm
-S3UPLOAD="aws s3 cp --recursive  --acl public-read"
+S3UPLOAD="aws s3 sync --acl public-read"
 
 # XXX: awscli is unable to read volume-mounted ~/.aws from within a docker container. So, we resort to this hack.
 export AWS_ACCESS_KEY_ID="`grep access_key_id ~/.aws/credentials | cut -d= -f2 | xargs`"
