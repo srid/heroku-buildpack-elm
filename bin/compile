@@ -11,7 +11,13 @@ build=$(cd "$1/" && pwd)
 cache=$(cd "$2/" && pwd)
 buildpack=$(cd "$(dirname $0)/.." && pwd)
 
-ELM_VERSION=${ELM_VERSION:-0.15}
+
+# Accept user-defined environment 
+if test -f ${build}/.buildpack.env; then
+    source ${build}/.buildpack.env
+fi
+
+ELM_VERSION=${ELM_VERSION:-master}
 SPAS_VERSION=${SPAS_VERSION:-0.1.1.0}
 WARP_VERSION=${WARP_VERSION:-3.1.0}
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets

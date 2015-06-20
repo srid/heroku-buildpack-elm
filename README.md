@@ -4,6 +4,17 @@ See [the blog post](http://www.srid.ca/posts/2015-06-14-elm-on-heroku.html) for 
 
 Or, check out the example app [elm-todomvc](https://github.com/evancz/elm-todomvc).
 
+## Customizing
+
+By default elm master branch binaries are used. To specify an alternative Elm
+version:
+
+```
+$ cat > .buildpack.env
+export ELM_VERSION=0.15
+^D
+```
+
 ## HACKING
 
 ### Generating and uploading binaries
