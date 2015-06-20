@@ -15,10 +15,17 @@ RUN cabal update && ${CABAL_INSTALL} cabal-install
 RUN mkdir -p /app/bin
 ENV PATH /app/bin:$PATH
 
-# Elm 0.15, per http://elm-lang.org/Install.elm
-# Modify this instruction for newer releases.
+# Install wasp (for those that do not want to use spas)
+ENV WARP_VERSION 3.1.0
+RUN mkdir /tmp/warp \
+    && cd /tmp/warp \
+    && cabal sandbox init \
+    && ${CABAL_INSTALL} wai-app-static-${WARP_VERSION} \
+    && cp -v .cabal-sandbox/bin/* /app/bin/
+
+# Install Elm
 ADD install-elm.sh /usr/bin/
-ENV ELM_VERSION 0.15
+ENV ELM_VERSION master
 RUN /usr/bin/install-elm.sh
 
 # Install spas
@@ -29,14 +36,6 @@ RUN cd /tmp/spas \
   && cabal sandbox init \
   && ${CABAL_INSTALL} \
   && cp .cabal-sandbox/bin/* /app/bin/
-
-# Install wasp (for those that do not want to use spas)
-ENV WARP_VERSION 3.1.0
-RUN mkdir /tmp/warp \
-    && cd /tmp/warp \
-    && cabal sandbox init \
-    && ${CABAL_INSTALL} wai-app-static-${WARP_VERSION} \
-    && cp -v .cabal-sandbox/bin/* /app/bin/
 
 # Startup scripts for heroku
 RUN mkdir -p /app/.profile.d /app/bin
