@@ -8,7 +8,7 @@ binaries:
 	docker build -t ${IMG} .
 
 upload:
-	docker run --rm -v ${AWSVOL} --name=${IMG}-uploader ${IMG} docker2s3.sh
+	docker run --rm -v ${AWSVOL} --name=${IMG}-uploader ${IMG} upload-to-s3.sh
 
 shell:
 	docker run --rm -it -v ${AWSVOL} ${IMG} bash
