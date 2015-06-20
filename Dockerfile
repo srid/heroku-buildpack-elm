@@ -26,7 +26,7 @@ RUN mkdir /tmp/elm \
   && cp .cabal-sandbox/bin/* /app/bin/
 
 # Install spas
-ENV SPAS_VERSION 0.1.0.0
+ENV SPAS_VERSION 0.1.1.0
 ENV SPAS_REPO "https://github.com/srid/spas.git "
 RUN git clone ${SPAS_REPO} -b ${SPAS_VERSION} /tmp/spas
 RUN cd /tmp/spas \

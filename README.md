@@ -19,3 +19,10 @@ aws configure  # creates ~/.aws/...
 make upload
 ```
 
+### Updating binaries
+
+* Modify the `FOO_VERSION` env var in Dockerfile
+* `make binaries upload`
+* Modify the `FOO_VERSION` env var in `bin/compile`
+* Update CHANGELOG.md
+* git push
