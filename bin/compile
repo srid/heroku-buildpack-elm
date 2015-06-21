@@ -18,7 +18,7 @@ if test -f ${build}/.buildpack.env; then
 fi
 
 ELM_VERSION=${ELM_VERSION:-master}
-SPAS_VERSION=${SPAS_VERSION:-0.1.1.0}
+SPAS_VERSION=${SPAS_VERSION:-0.1.1.1}
 WARP_VERSION=${WARP_VERSION:-3.1.0}
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets
 

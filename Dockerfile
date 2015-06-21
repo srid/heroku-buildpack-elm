@@ -29,8 +29,8 @@ ENV ELM_VERSION master
 RUN /usr/bin/install-elm.sh
 
 # Install spas
-ENV SPAS_VERSION 0.1.1.0
-ENV SPAS_REPO "https://github.com/srid/spas.git "
+ENV SPAS_VERSION 0.1.1.1
+ENV SPAS_REPO "https://github.com/srid/spas.git"
 RUN git clone ${SPAS_REPO} -b ${SPAS_VERSION} /tmp/spas
 RUN cd /tmp/spas \
   && cabal sandbox init \
