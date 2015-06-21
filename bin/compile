@@ -27,6 +27,7 @@ download() {
            basename=$2
            if test -f ${basename}
            then
+            echo "       (re-using cache)"
             true
            else
             wget -q -c ${url}/${basename}
