@@ -39,8 +39,14 @@ error() {
     exit 1
 }
 
-mkdir -p ${cache}/bin
-cd ${cache}/bin
+mkcd()
+{
+    mkdir -p $1 && cd $1
+}
+
+PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH
+
+mkcd ${cache}/bin/elm-${ELM_VERSION}
 echo "-----> Retrieving Elm ${ELM_VERSION} binaries"
 download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
@@ -48,18 +54,19 @@ download ${S3_URL}/elm/${ELM_VERSION} elm-make
 
 if grep --quiet spas ${build}/Procfile 2> /dev/null; then
    echo "-----> Retrieving Spas ${SPAS_VERSION} binary"
+   mkcd ${cache}/bin/spas-${SPAS_VERSION}
    download ${S3_URL}/spas/${SPAS_VERSION} spas
    mkdir -p ${build}/bin
    cp spas ${build}/bin
 else
    echo "-----> Retrieving Warp ${WARP_VERSION} binary"
+   mkcd ${cache}/bin/warp-${WARP_VERSION}
    download ${S3_URL}/warp/${WARP_VERSION} warp
    mkdir -p ${build}/bin
    cp warp ${build}/bin
 fi
 
 chmod -R a+x ${cache}/bin ${build}/bin
-PATH=${cache}/bin:$PATH
 
 # Restore elm package cache
 if test -d ${cache}/elm-stuff; then
