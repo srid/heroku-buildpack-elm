@@ -23,11 +23,6 @@ RUN mkdir /tmp/warp \
     && ${CABAL_INSTALL} wai-app-static-${WARP_VERSION} \
     && cp -v .cabal-sandbox/bin/* /app/bin/
 
-# Install Elm
-ADD install-elm.sh /usr/bin/
-ENV ELM_VERSION master
-RUN /usr/bin/install-elm.sh
-
 # Install spas
 ENV SPAS_VERSION 0.1.1.1
 ENV SPAS_REPO "https://github.com/srid/spas.git"
@@ -37,6 +32,12 @@ RUN cd /tmp/spas \
   && ${CABAL_INSTALL} \
   && cp .cabal-sandbox/bin/* /app/bin/
 
+# Install Elm
+ENV ELM_VERSION 0.15.1
+RUN cd /tmp \
+  && curl https://raw.githubusercontent.com/elm-lang/elm-platform/master/installers/BuildFromSource.hs > BuildFromSource.hs \
+  && runhaskell BuildFromSource.hs ${ELM_VERSION}
+  
 # Startup scripts for heroku
 RUN mkdir -p /app/.profile.d /app/bin
 RUN echo "export PATH=\"/app/bin:\$PATH\"" > /app/.profile.d/appbin.sh
