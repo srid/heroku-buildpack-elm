@@ -36,8 +36,9 @@ RUN cd /tmp/spas \
 ENV ELM_VERSION 0.15.1
 RUN cd /tmp \
   && curl https://raw.githubusercontent.com/elm-lang/elm-platform/master/installers/BuildFromSource.hs > BuildFromSource.hs \
-  && runhaskell BuildFromSource.hs ${ELM_VERSION}
-  
+  && runhaskell BuildFromSource.hs ${ELM_VERSION} \
+  && cp Elm-Platform/${ELM_VERSION}/bin/* /app/bin/
+
 # Startup scripts for heroku
 RUN mkdir -p /app/.profile.d /app/bin
 RUN echo "export PATH=\"/app/bin:\$PATH\"" > /app/.profile.d/appbin.sh
