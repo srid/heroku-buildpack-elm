@@ -30,7 +30,7 @@ download() {
             echo "       (re-using cache)"
             true
            else
-            wget -q -c ${url}/${basename}
+            wget -nv -c ${url}/${basename}
            fi
 }
 
