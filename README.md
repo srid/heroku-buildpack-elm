@@ -1,6 +1,6 @@
 # Heroku buildpack for Elm apps
 
-See [the blog post](http://www.srid.ca/posts/2015-06-14-elm-on-heroku.html) for details.
+See [the blog post](https://github.com/srid/articles/blob/master/elm-on-heroku.md) for details.
 
 Or, check out the example app [elm-todomvc](https://github.com/evancz/elm-todomvc).
 
