@@ -18,8 +18,6 @@ if test -f ${build}/.buildpack.env; then
 fi
 
 ELM_VERSION=${ELM_VERSION:-0.15.1}
-SPAS_VERSION=${SPAS_VERSION:-0.1.1.1}
-WARP_VERSION=${WARP_VERSION:-3.1.0}
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets
 
 download() {
@@ -48,35 +46,21 @@ mkcd()
 PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH
 
 mkcd ${cache}/bin/elm-${ELM_VERSION}
-echo "-----> Retrieving Elm ${ELM_VERSION} binaries"
+echo "-----> Fetching ${ELM_VERSION}"
 download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
 download ${S3_URL}/elm/${ELM_VERSION} elm-make
-
-if grep --quiet spas ${build}/Procfile 2> /dev/null; then
-   echo "-----> Retrieving Spas ${SPAS_VERSION} binary"
-   mkcd ${cache}/bin/spas-${SPAS_VERSION}
-   download ${S3_URL}/spas/${SPAS_VERSION} spas
-   mkdir -p ${build}/bin
-   cp spas ${build}/bin
-else
-   echo "-----> Retrieving Warp ${WARP_VERSION} binary"
-   mkcd ${cache}/bin/warp-${WARP_VERSION}
-   download ${S3_URL}/warp/${WARP_VERSION} warp
-   mkdir -p ${build}/bin
-   cp warp ${build}/bin
-fi
 
 chmod -R a+x ${cache}/bin ${build}/bin
 
 # Restore elm package cache
 if test -d ${cache}/elm-stuff; then
-   echo "-----> Restore Elm package cache"
+   echo "-----> Restoring Elm cache"
    cp -r ${cache}/elm-stuff ${build}/elm-stuff
 fi
 
 cd ${build}
-echo "-----> Installing Elm package dependencies"
+echo "-----> Fetching dependencies"
 elm package install --yes | indent
 cp -r ${build}/elm-stuff ${cache}/
 
@@ -89,11 +73,9 @@ get_app_json_env() {
 }
 
 ELM_COMPILE=$(get_app_json_env "ELM_COMPILE")
-echo "-----> Compiling Elm sources with: ${ELM_COMPILE}"
+echo "-----> Compiling with ${ELM_COMPILE}"
 ${ELM_COMPILE} | indent
 
 
-ELM_STATIC_DIR=$(get_app_json_env "ELM_STATIC_DIR")
-mkdir -p $build/.profile.d
-echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
-echo "cd ${ELM_STATIC_DIR}" > $build/.profile.d/static-dir.sh
+# mkdir -p $build/.profile.d
+# echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
