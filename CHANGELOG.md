@@ -1,6 +1,11 @@
 # Change Log
 
-## June 30, 2015
+## Sep 5, 2015
+
+- #6: No longer responsible for static hosting
+- Dropped spas support
+
+## June 30, 2015 (v1.0)
 
 - Upgrade Elm to [0.15.1](http://elm-lang.org/blog/compiler-errors-for-humans)
 

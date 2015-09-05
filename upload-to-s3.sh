@@ -9,17 +9,13 @@ export AWS_ACCESS_KEY_ID="`grep access_key_id ~/.aws/credentials | cut -d= -f2 |
 export AWS_SECRET_ACCESS_KEY="`grep secret_access_key ~/.aws/credentials | cut -d= -f2 | xargs`"
 export AWS_DEFAULT_REGION="`grep region ~/.aws/config | cut -d= -f2 | xargs`"
 
-echo "Uploading elm ${ELM_VERSION}, spas ${SPAS_VERSION} and warp to bucket ${BUCKET}"
+echo "Uploading elm ${ELM_VERSION} to bucket ${BUCKET}"
 echo "What we have in /app/bin right now:"
 ls -l /app/bin
 set -x
-${S3UPLOAD} /app/bin/ s3://${BUCKET}/assets/warp/${WARP_VERSION}/ \
-            --exclude "*" --include "warp"
 ${S3UPLOAD} /app/bin/ s3://${BUCKET}/assets/elm/${ELM_VERSION}/ --exclude "*" \
     --include "elm" \
     --include "elm-package" \
     --include "elm-make"
-${S3UPLOAD} /app/bin/ s3://${BUCKET}/assets/spas/${SPAS_VERSION}/ \
-            --exclude "*" --include "spas"
 
 echo "done"
