@@ -1,8 +1,11 @@
 # Heroku buildpack for Elm apps
 
-See [the blog post](https://github.com/srid/articles/blob/master/elm-on-heroku.md) for details.
+Check out the example app [elm-todomvc](https://github.com/evancz/elm-todomvc). In brief:
 
-Or, check out the example app [elm-todomvc](https://github.com/evancz/elm-todomvc).
+- Add an [`app.json`](https://github.com/evancz/elm-todomvc/blob/master/app.json) file
+  - Ensure that a second buildpack provides the web server (elm-todomvc uses the static buildpack)
+- Specify the value of `ELM_COMPILE` (command used to compile your Elm sources) in `app.json`
+- Deploy!
 
 ## Customizing
 
@@ -32,8 +35,8 @@ make upload
 
 ### Updating binaries
 
-* Modify the `FOO_VERSION` env var in Dockerfile
+* Modify the `ELM_VERSION` env var in Dockerfile
 * `make binaries upload`
-* Modify the `FOO_VERSION` env var in `bin/compile`
+* Modify the `ELM_VERSION` env var in `bin/compile`
 * Update CHANGELOG.md
 * git push
