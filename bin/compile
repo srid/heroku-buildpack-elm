@@ -51,7 +51,7 @@ download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
 download ${S3_URL}/elm/${ELM_VERSION} elm-make
 
-chmod -R a+x ${cache}/bin ${build}/bin
+chmod -R a+x ${cache}/bin
 
 # Restore elm package cache
 if test -d ${cache}/elm-stuff; then
