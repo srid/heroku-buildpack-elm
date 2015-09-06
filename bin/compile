@@ -25,7 +25,6 @@ download() {
            basename=$2
            if test -f ${basename}
            then
-            echo "       (re-using cache)"
             true
            else
             wget -nv -c ${url}/${basename}
@@ -46,7 +45,7 @@ mkcd()
 PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH
 
 mkcd ${cache}/bin/elm-${ELM_VERSION}
-echo "-----> Fetching ${ELM_VERSION}"
+echo "-----> Retrieving ${ELM_VERSION}"
 download ${S3_URL}/elm/${ELM_VERSION} elm
 download ${S3_URL}/elm/${ELM_VERSION} elm-package
 download ${S3_URL}/elm/${ELM_VERSION} elm-make
