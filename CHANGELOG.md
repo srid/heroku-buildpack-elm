@@ -4,6 +4,7 @@
 
 - #6: No longer responsible for static hosting
 - Dropped spas support
+- Fast deployment, via caching of build artifacts
 
 ## June 30, 2015 (v1.0)
 
