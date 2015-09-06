@@ -61,7 +61,6 @@ fi
 cd ${build}
 echo "-----> Fetching dependencies"
 elm package install --yes | indent
-cp -r ${build}/elm-stuff ${cache}/
 
 get_app_json_env() {
     name=$1
@@ -75,6 +74,5 @@ ELM_COMPILE=$(get_app_json_env "ELM_COMPILE")
 echo "-----> Compiling with ${ELM_COMPILE}"
 ${ELM_COMPILE} | indent
 
-
-# mkdir -p $build/.profile.d
-# echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/elm.sh
+# Copy package and compile artifacts back to cache
+cp -r ${build}/elm-stuff ${cache}/
