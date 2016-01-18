@@ -13,7 +13,6 @@ RUN apt-get update && \
 
 WORKDIR /tmp
 
-
 # Download and install newer, Elm 0.16-compatible Haskell Platform
 RUN wget "https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz"
 RUN tar xfz "./haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz"
@@ -28,7 +27,7 @@ ENV LANG en_US.utf8
 
 # Install Elm
 ENV ELM_VERSION 0.16
-WORKDIR /tmp  
+
 RUN curl https://raw.githubusercontent.com/elm-lang/elm-platform/master/installers/BuildFromSource.hs > BuildFromSource.hs
 RUN runhaskell BuildFromSource.hs ${ELM_VERSION}
 RUN cp Elm-Platform/${ELM_VERSION}/.cabal-sandbox/bin/* /app/bin/
