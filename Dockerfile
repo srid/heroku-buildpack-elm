@@ -13,6 +13,8 @@ RUN apt-get update && \
 
 WORKDIR /tmp
 
+
+# Download and install newer, Elm 0.16-compatible Haskell Platform
 RUN wget "https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz"
 RUN tar xfz "./haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz"
 RUN "./install-haskell-platform.sh"
@@ -21,6 +23,7 @@ RUN cabal update && ${CABAL_INSTALL} cabal-install
 
 RUN mkdir -p /app/bin
 ENV PATH /app/bin:$PATH
+# Required for Elm to compile properly
 ENV LANG en_US.utf8
 
 # Install Elm
