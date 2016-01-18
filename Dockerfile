@@ -10,17 +10,25 @@ ENV PATH /root/.cabal/bin:$PATH
 RUN apt-get update && \
     apt-get -y install haskell-platform wget libncurses5-dev && \
     apt-get clean
+
+WORKDIR /tmp
+
+RUN wget "https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz"
+RUN tar xfz "./haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz"
+RUN "./install-haskell-platform.sh"
+
 RUN cabal update && ${CABAL_INSTALL} cabal-install
 
 RUN mkdir -p /app/bin
 ENV PATH /app/bin:$PATH
+ENV LANG en_US.utf8
 
 # Install Elm
-ENV ELM_VERSION 0.15.1
-RUN cd /tmp \
-  && curl https://raw.githubusercontent.com/elm-lang/elm-platform/master/installers/BuildFromSource.hs > BuildFromSource.hs \
-  && runhaskell BuildFromSource.hs ${ELM_VERSION} \
-  && cp Elm-Platform/${ELM_VERSION}/bin/* /app/bin/
+ENV ELM_VERSION 0.16
+WORKDIR /tmp  
+RUN curl https://raw.githubusercontent.com/elm-lang/elm-platform/master/installers/BuildFromSource.hs > BuildFromSource.hs
+RUN runhaskell BuildFromSource.hs ${ELM_VERSION}
+RUN cp Elm-Platform/${ELM_VERSION}/.cabal-sandbox/bin/* /app/bin/
 
 # Startup scripts for heroku
 RUN mkdir -p /app/.profile.d /app/bin
