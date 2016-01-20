@@ -1,5 +1,9 @@
 # Change Log
 
+## Jan 20, 2016
+
+- Upgrade Elm to [0.16](http://elm-lang.org/blog/compilers-as-assistants)
+
 ## Sep 5, 2015
 
 - #6: No longer responsible for static hosting
