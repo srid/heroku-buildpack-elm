@@ -42,6 +42,7 @@ mkcd()
     mkdir -p $1 && cd $1
 }
 
+echo "export PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH" >> $buildpack/export
 PATH=${cache}/bin/elm-${ELM_VERSION}:$PATH
 
 mkcd ${cache}/bin/elm-${ELM_VERSION}
