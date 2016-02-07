@@ -58,17 +58,24 @@ if test -d ${cache}/elm-stuff; then
    cp -r ${cache}/elm-stuff ${build}/elm-stuff
 fi
 
-cd ${build}
-echo "-----> Fetching dependencies"
-elm package install --yes | indent
-
 get_app_json_env() {
     name=$1
     if ! test -f ${build}/app.json; then
         error "app.json missing."
     fi
-    python -c "import json; j=json.load(open('app.json')); print j['env']['${name}']"
+    python -c "import json; j=json.load(open('app.json')); print j['env'].get('${name}')"
 }
+
+cd ${build}
+ELM_PACKAGE_INSTALL=$(get_app_json_env "ELM_PACKAGE_INSTALL")
+
+if [ "$ELM_PACKAGE_INSTALL" == "None" ]; then
+  echo "-----> Fetching dependencies"
+  elm package install --yes | indent
+else
+  echo "-----> Fetching dependencies with ${ELM_PACKAGE_INSTALL}"
+  $ELM_PACKAGE_INSTALL | indent
+fi
 
 ELM_COMPILE=$(get_app_json_env "ELM_COMPILE")
 echo "-----> Compiling with ${ELM_COMPILE}"
