@@ -5,6 +5,7 @@ Check out the example app [elm-todomvc](https://github.com/evancz/elm-todomvc). 
 - Add an [`app.json`](https://github.com/evancz/elm-todomvc/blob/master/app.json) file
   - Ensure that a second buildpack provides the web server (elm-todomvc uses the static buildpack)
 - Specify the value of `ELM_COMPILE` (command used to compile your Elm sources) in `app.json`
+- Optionally specify the value of `ELM_PACKAGE_INSTALL` (command used to install your dependencies) in `app.json`. By default `elm package install --yes` will be used.
 - Deploy!
 
 ## Customizing
