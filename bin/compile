@@ -17,7 +17,7 @@ if test -f ${build}/.buildpack.env; then
     source ${build}/.buildpack.env
 fi
 
-ELM_VERSION=${ELM_VERSION:-0.16}
+ELM_VERSION=${ELM_VERSION:-0.17}
 S3_URL=https://s3.amazonaws.com/heroku-buildpack-elm/assets
 
 download() {

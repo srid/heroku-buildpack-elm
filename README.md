@@ -36,10 +36,14 @@ aws configure  # creates ~/.aws/...
 make upload
 ```
 
-### Updating binaries
+### Upgrading to newer Elm version
 
 * Modify the `ELM_VERSION` env var in Dockerfile
 * `make binaries upload`
 * Modify the `ELM_VERSION` env var in `bin/compile`
 * Update CHANGELOG.md
 * git push
+
+## Questions?
+
+Feel free to contact me at srid@srid.ca.

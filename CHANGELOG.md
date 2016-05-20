@@ -1,5 +1,9 @@
 # Change Log
 
+## May 19, 2016
+
+- Upgrade Elm to [0.17](http://elm-lang.org/blog/farewell-to-frp)
+
 ## Jan 20, 2016
 
 - Upgrade Elm to [0.16](http://elm-lang.org/blog/compilers-as-assistants)
