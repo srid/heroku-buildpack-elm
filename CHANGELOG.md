@@ -3,6 +3,7 @@
 ## May 19, 2016
 
 - Upgrade Elm to [0.17](http://elm-lang.org/blog/farewell-to-frp)
+- #12: Make Elm available for other buildpacks 
 
 ## Jan 20, 2016
 
