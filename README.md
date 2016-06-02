@@ -2,7 +2,7 @@
 
 Check out the example app [elm-todomvc](https://github.com/srid/elm-todomvc). In brief:
 
-- Add an [`app.json`](https://github.com/srid/elm-todomvc/blob/master/app.json) file
+- Add an [`app.json`](https://github.com/srid/elm-todomvc/blob/heroku/app.json) file
   - Ensure that a second buildpack provides the web server (elm-todomvc uses the static buildpack)
 - Specify the value of `ELM_COMPILE` (command used to compile your Elm sources) in `app.json`
 - Add the elm buildpack: `heroku buildpacks:add https://github.com/srid/heroku-buildpack-elm`
