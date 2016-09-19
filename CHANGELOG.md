@@ -1,5 +1,9 @@
 # Change Log
 
+## Sep 19, 2016
+
+- Upgrade to Elm 0.17.1
+
 ## May 19, 2016
 
 - Upgrade Elm to [0.17](http://elm-lang.org/blog/farewell-to-frp)
