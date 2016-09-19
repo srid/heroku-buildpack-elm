@@ -17,7 +17,7 @@ RUN apt-get install -y --force-yes cabal-install-${CABAL_VERSION}
 ENV PATH /opt/ghc/${GHC_VERSION}/bin:/opt/cabal/${CABAL_VERSION}/bin:$PATH
 
 # Install Elm
-ENV ELM_VERSION 0.17
+ENV ELM_VERSION 0.17.1
 # Required for Elm to compile properly
 ENV LANG en_US.utf8
 
