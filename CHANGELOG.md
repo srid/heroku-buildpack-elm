@@ -1,5 +1,9 @@
 # Change Log
 
+## Sep 20, 2016
+
+- [Build] #20: Retrieve elm binaries using npm
+
 ## Sep 19, 2016
 
 - Upgrade to Elm 0.17.1
@@ -7,7 +11,7 @@
 ## May 19, 2016
 
 - Upgrade Elm to [0.17](http://elm-lang.org/blog/farewell-to-frp)
-- #12: Make Elm available for other buildpacks 
+- #12: Make Elm available for other buildpacks
 
 ## Jan 20, 2016
 
