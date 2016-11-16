@@ -1,5 +1,9 @@
 # Change Log
 
+## Nov 16, 2016
+
+- Upgrade to Elm 0.18.0
+
 ## Sep 20, 2016
 
 - [Build] #20: Retrieve elm binaries using npm
