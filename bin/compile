@@ -53,12 +53,6 @@ download ${S3_URL}/elm/${ELM_VERSION} elm-make
 
 chmod -R a+x ${cache}/bin
 
-# Restore elm package cache
-if test -d ${cache}/elm-stuff; then
-   echo "-----> Restoring Elm cache"
-   cp -r ${cache}/elm-stuff ${build}/elm-stuff
-fi
-
 cd ${build}
 echo "-----> Fetching dependencies"
 elm package install --yes | indent
@@ -74,6 +68,3 @@ get_app_json_env() {
 ELM_COMPILE=$(get_app_json_env "ELM_COMPILE")
 echo "-----> Compiling with ${ELM_COMPILE}"
 ${ELM_COMPILE} | indent
-
-# Copy package and compile artifacts back to cache
-cp -r ${build}/elm-stuff ${cache}/
