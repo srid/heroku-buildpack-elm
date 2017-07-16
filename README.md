@@ -18,7 +18,7 @@ The buildpack aims to use the latest version of Elm by default. To specify an al
 version, create this file in your repo:
 
 ```
-$ cat > .buildpack.env
+$ cat .buildpack.env
 export ELM_VERSION=0.15
 ^D
 ```
@@ -28,7 +28,7 @@ export ELM_VERSION=0.15
 By default, this buildpack will save and reuse intermediate build objects between deploys. If you want to perform a clean build on every deploy, you may specify that in your .buildpack.env file:
 
 ```
-$ cat > .buildpack.env
+$ cat .buildpack.env
 export CACHE_BUILD_OBJECTS=false
 ^D
 ```
