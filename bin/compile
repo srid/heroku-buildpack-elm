@@ -56,10 +56,10 @@ chmod -R a+x ${cache}/bin
 
 # Restore elm package cache
 if [ $CACHE_BUILD_OBJECTS = true ]; then
-  if test -d ${cache}/elm-stuff; then
-    echo "-----> Restoring Elm cache"
-    cp -r ${cache}/elm-stuff ${build}/elm-stuff
-  fi
+    if test -d ${cache}/elm-stuff; then
+        echo "-----> Restoring Elm cache"
+        cp -r ${cache}/elm-stuff ${build}/elm-stuff
+    fi
 fi
 
 cd ${build}
@@ -79,6 +79,6 @@ echo "-----> Compiling with ${ELM_COMPILE}"
 ${ELM_COMPILE} | indent
 
 if [ $CACHE_BUILD_OBJECTS = true ]; then
-  # Copy package and compile artifacts back to cache
-  cp -r ${build}/elm-stuff ${cache}/
+    # Copy package and compile artifacts back to cache
+    cp -r ${build}/elm-stuff ${cache}/
 fi
