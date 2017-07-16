@@ -25,7 +25,7 @@ export ELM_VERSION=0.15
 
 ### Build Cache
  
-By default, this buildpack will save and reuse intermediate build objects between deploys. If you want to perform a clean build on every deploy, you say so in your .buildpack.env file:
+By default, this buildpack will save and reuse intermediate build objects between deploys. If you want to perform a clean build on every deploy, you may specify that in your .buildpack.env file:
 
 ```
 $ cat > .buildpack.env
