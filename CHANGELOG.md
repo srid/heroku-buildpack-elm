@@ -1,5 +1,9 @@
 # Change Log
 
+## July 16, 2017
+
+- #24: Build cache can now be disabled by the user
+
 ## Nov 16, 2016
 
 - Upgrade to Elm 0.18.0
